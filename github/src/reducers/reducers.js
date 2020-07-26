@@ -1,31 +1,45 @@
-import * as actions from "../actions/actions";
 
-//import { CARGANDO, TRAER_TODOS, ACTUALIZAR } from "../actions/actionsTypes";
 import * as actionsTypes from "../actions/actionsTypes";
 
 const INITIAL_STATE = {
     cargando: false,
-    user: null,
+    user: "pao8richrich",
+    lista: [null], 
+    userInfo: {}
 };
 
 
-const reducer = (state = INITIAL_STATE, action) => {
-    switch (action.type) {
+const reducer = (state = INITIAL_STATE,{ type, payload }) => {
+    switch (type) {
         case actionsTypes.TRAER_TODOS:
             return {
-                ...state, user: action.payload
+                ...state, user: payload
             }
+           
             case actionsTypes.CARGANDO:
                 return {
                     ...state, cargando: !state.cargando
                 }
-                case actionsTypes.LIMPIAR:
+               
+            case actionsTypes.LIMPIAR:
                     return {
                         ...state, user: null
                     }
-                    default:
-                        return state
+                 
+            case actionsTypes.ACTUALIZAR_LISTADO:
+
+                return {
+                    ...state, lista: payload
+                }
+            case actionsTypes.ACTUALIZAR_USER_INFO:
+                return {
+                    ...state, userInfo: payload
+                }
+              
+            default:
+                return state
     }
+  
 };
 
 export default reducer;
